@@ -1,0 +1,46 @@
+/* ===== V02.14 · About you, a quiet page inside Settings ===== */
+.settings > *:not(.ssub){transition:opacity .45s var(--ease),transform .55s var(--ease)}
+.settings.about > *:not(.ssub){opacity:0;transform:translateX(-18px);pointer-events:none;visibility:hidden;position:absolute}
+.ssub{display:none}
+.settings.about .ssub{display:block;animation:aboutIn .6s var(--ease)}
+@keyframes aboutIn{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+.sback{all:unset;cursor:pointer;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--fg-soft);margin-bottom:22px;display:inline-block;transition:color .3s}
+.sback:hover,.sback:focus-visible{color:var(--fg)}
+.ssub section{margin-bottom:26px}
+.mef{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid color-mix(in srgb,var(--line) 55%,transparent)}
+.mef:last-child{border-bottom:0}
+.met{margin:0 0 3px;font-size:13px;line-height:1.5;color:var(--fg)}
+.mes{margin:0;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-soft)}
+.mef.pend .met{font-style:italic;opacity:.55}
+.mef.pend .mes{color:#B8651C}
+.mef.sens .mes::before{content:"◦ ";color:#B8651C}
+.meacts{display:flex;gap:2px;flex:none;opacity:0;transition:opacity .35s var(--ease)}
+.mef:hover .meacts,.mef:focus-within .meacts,.mef.pend .meacts{opacity:1}
+.meb{all:unset;cursor:pointer;position:relative;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;color:var(--fg-soft);transition:color .3s,background .3s}
+.meb:hover,.meb:focus-visible{color:var(--fg);background:color-mix(in srgb,var(--fg) 7%,transparent)}
+.meb svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.meb .atip{position:absolute;top:calc(100% + 4px);right:0;white-space:nowrap;font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:var(--fg);color:var(--bg);opacity:0;pointer-events:none;transition:opacity .25s;z-index:2}
+.meb:hover .atip,.meb:focus-visible .atip{opacity:1}
+.mefix{display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--fg-soft);margin-bottom:4px}
+.mefix input{all:unset;flex:1;font-size:13px;color:var(--fg);padding:2px 0}
+.mefix button{all:unset;cursor:pointer;font-size:16px;color:var(--fg-soft);width:20px;text-align:center}
+.mefix button:hover{color:var(--fg)}
+.menote{font-size:10.5px;line-height:1.7;color:var(--fg-soft);margin-top:8px}
+.ssub ul{list-style:none;margin:0;padding:0}
+body.setting .undoic{z-index:14}
+/* v02.14.1: › instead of "View →"; categories fold */
+.slink.sgo{width:22px;height:22px;padding:0;display:grid;place-items:center;font-size:15px;line-height:1}
+.ssub .mecat{margin-bottom:0}
+.ssub .mecat h4{padding:0;margin:0;border-bottom:1px solid var(--line)}
+.mehd{all:unset;cursor:pointer;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:10px;padding:14px 0;font:inherit;letter-spacing:inherit;color:var(--fg-soft);transition:color .3s}
+.mehd:hover,.mehd:focus-visible,.mecat.open .mehd{color:var(--fg)}
+.mehd span{flex:1}
+.mehd small{font-size:9px;letter-spacing:.16em;opacity:.7}
+.mehd small i{font-style:normal;color:#B8651C}
+.mehd svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;transition:transform .45s var(--ease)}
+.mecat.open .mehd svg{transform:rotate(90deg)}
+.mewrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease),opacity .4s var(--ease);opacity:0}
+.mewrap > ul{overflow:hidden;min-height:0}
+.mecat.open .mewrap{grid-template-rows:1fr;opacity:1}
+.mecat.open .mewrap > ul{padding-bottom:10px}
+.menote{margin-top:22px}

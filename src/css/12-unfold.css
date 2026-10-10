@@ -1,0 +1,14 @@
+/* unfolding choices (Detroit) */
+.unfold{position:fixed;inset:0;z-index:8;pointer-events:none}
+.unfold.on{pointer-events:auto;background:var(--sheet);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.unfold .hub{position:absolute;transform:translate(-50%,-50%);font-size:22px;opacity:0;transition:opacity .4s}
+.unfold.on .hub{opacity:1}
+.opt{all:unset;cursor:pointer;position:absolute;font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:6px 10px;border:1px solid var(--line);background:var(--bg);white-space:nowrap;transform:translate(-50%,-50%) scale(.3);opacity:0;transition:transform .6s var(--ease),opacity .6s var(--ease),left .6s var(--ease),top .6s var(--ease)}
+.opt.in{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.opt:hover,.opt:focus-visible{border-color:var(--fg)}
+.restless .opt.in{animation:jitter 1.3s infinite ease-in-out;filter:blur(.4px)}
+.restless .opt.in:nth-of-type(odd){animation-duration:1.7s}
+@keyframes jitter{0%,100%{translate:0 0}25%{translate:1.5px -1px}50%{translate:-1px 1.5px}75%{translate:1px 1px}}
+.spoke{position:absolute;height:1px;background:var(--line);transform-origin:0 0;pointer-events:none;opacity:0;transition:opacity .6s}
+.spoke.in{opacity:1}
+

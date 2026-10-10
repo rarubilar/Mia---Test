@@ -1,0 +1,40 @@
+/* ===== V02.2 · Mia Test ===== */
+/* the (i): top-left corner of every space and window */
+.tinfo{all:unset;cursor:pointer;position:fixed;left:clamp(16px,2vw,28px);top:clamp(14px,2.4vh,24px);z-index:60;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;color:var(--fg-soft);opacity:0;pointer-events:none;transition:opacity .9s var(--ease),color .3s}
+.tinfo.show{opacity:.6;pointer-events:auto}
+.tinfo.show:hover,.tinfo.show:focus-visible,.tinfo.open{opacity:1;color:var(--fg)}
+.tinfo svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round}
+.tinfo:focus-visible{outline:1px dotted var(--fg-soft);outline-offset:3px}
+.tcard{position:fixed;left:clamp(16px,2vw,28px);top:calc(clamp(14px,2.4vh,24px) + 42px);z-index:61;width:min(360px,calc(100vw - 32px));max-height:calc(100vh - 110px);overflow:auto;box-sizing:border-box;padding:20px 22px 18px;border-radius:18px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);color:var(--fg);opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s var(--ease),transform .5s var(--ease)}
+.tcard.on{opacity:1;transform:none;pointer-events:auto}
+.tcard h3{margin:0 0 8px;font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.1;-webkit-text-stroke:0}
+.teye{margin:0 0 6px;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--fg-soft)}
+.td{margin:0 0 16px;font-size:12px;line-height:1.65}
+.tcard ul{margin:0 0 14px;padding:0;list-style:none}
+.tcard li{position:relative;padding:0 0 7px 14px;font-size:11.5px;line-height:1.55;color:var(--fg)}
+.tcard li::before{content:"";position:absolute;left:2px;top:.62em;width:5px;height:1px;background:var(--fg-soft)}
+.tnow{margin:0;padding-top:10px;border-top:1px solid var(--line);font-size:10px;line-height:1.6;color:var(--fg-soft)}
+/* the command centre: one quiet line that says what the button under the cursor does */
+.proto{flex-wrap:wrap}
+.ptip{flex-basis:100%;margin:6px 0 0;min-height:1.6em;font-size:10.5px;letter-spacing:.02em;text-transform:none;line-height:1.55;color:var(--fg-soft);opacity:.35;transition:opacity .3s}
+.ptip:not(.on)::before{content:"Hover a button to see what it does."}
+.ptip.on{opacity:1;color:var(--fg)}
+.proto.min .ptip{display:none}
+/* Try asking: example questions above the writing bar */
+.tasks{display:none;position:absolute;left:50%;bottom:calc(100% + 92px);transform:translateX(-50%);flex-wrap:wrap;justify-content:center;gap:6px;width:min(660px,92vw)}
+.chat[data-mode="write"] .tasks{display:flex}
+.tasks .teye{flex-basis:100%;text-align:center;margin-bottom:4px}
+.tasks button{all:unset;cursor:pointer;font-size:11px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);color:var(--fg-soft);transition:color .3s,border-color .3s,background .3s}
+.tasks button:hover,.tasks button:focus-visible{color:var(--fg);border-color:var(--fg-soft);background:color-mix(in srgb,var(--fg) 6%,transparent)}
+
+/* while talking to Mia the command centre steps aside, so it never covers the writing bar */
+.proto{transition:opacity .5s var(--ease)}
+body.chatting .proto{opacity:0;pointer-events:none}
+/* the start screen says what this is; the (i) introduces itself once */
+.begin{flex-direction:column}
+.tbadge{position:absolute;left:0;right:0;bottom:7vh;text-align:center;font-size:9px;letter-spacing:.26em;opacity:.55;text-transform:uppercase}
+.thint{position:absolute;left:calc(100% + 10px);top:50%;transform:translateY(-50%);white-space:nowrap;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--fg);opacity:0;pointer-events:none;transition:opacity .8s var(--ease)}
+.tinfo.hint .thint{opacity:.8}
+.tinfo.hint{animation:tPulse 2.2s ease-in-out 3}
+@keyframes tPulse{50%{transform:scale(1.18)}}
+.tinfo.open .thint{opacity:0}

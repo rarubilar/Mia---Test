@@ -1,0 +1,22 @@
+/* ---------- prototype controls (not part of Mia) ---------- */
+.proto{position:fixed;right:92px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:11;display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;max-width:min(700px,calc(100vw - 32px));padding:10px 14px;border:1px dashed var(--line);background:var(--sheet);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-soft)}
+.proto b{font-weight:500;color:var(--fg)}
+.proto button{all:unset;cursor:pointer;padding:3px 7px;border:1px solid var(--line);color:var(--fg)}
+.proto button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.proto button:focus-visible{outline:1px dotted var(--fg);outline-offset:2px}
+.proto input[type=range]{width:120px;accent-color:var(--forest)}
+.proto .hide-proto{margin-left:auto}
+.proto.min > :not(.hide-proto){display:none}
+
+@media (max-width:760px){
+  :root{--side:170px}
+  .rail button.sp .lbl{display:none}
+  body.inspace.sideopen .rail button.sp .lbl{display:inline}
+  .fdate{right:auto;left:16px;top:16px;text-align:left}
+  .fside{left:16px;top:auto;bottom:90px}
+  .arrow.l{left:4px}.arrow.r{left:auto;right:4px}
+}
+@media (prefers-reduced-motion:reduce){
+  .opt,.sheet,.dc,.hc,.ring,.rail{transition:none;animation:none}
+  .restless .opt.in{animation:none}
+}

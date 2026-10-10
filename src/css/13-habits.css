@@ -1,0 +1,45 @@
+/* habits: rotating cards → detail */
+.carousel{position:relative;height:540px;margin-top:0}
+.hc{all:unset;box-sizing:border-box;cursor:pointer;position:absolute;left:50%;top:50%;width:295px;height:425px;margin:-212px 0 0 -147px;border-radius:18px;overflow:hidden;background:var(--c);color:var(--k);display:flex;flex-direction:column;padding:20px 22px 20px;-webkit-text-stroke:0;transition:transform .8s var(--ease),opacity .8s var(--ease),filter .8s var(--ease)}
+.hc .sk{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hc .top{display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:.14em;opacity:.75;position:relative}
+.hc .top .mk{font-size:15px;filter:grayscale(1)}
+.hc .av{flex:1;display:grid;place-items:center;position:relative}
+.hc .av svg{position:absolute;width:150px;height:150px}
+.hc .av span{font-size:64px;position:relative;filter:grayscale(.15)}
+.hc .av small{position:absolute;bottom:2px;font-size:9px;letter-spacing:.24em;opacity:.5;text-transform:uppercase}
+.hc h3{font-family:var(--serif);font-weight:400;font-size:40px;line-height:1;margin:0 0 6px;letter-spacing:-.01em}
+.hc .por{font-family:var(--serif);font-size:18px;line-height:1.2;margin:0 0 16px;opacity:.85}
+.hc .foot{display:flex;align-items:center;gap:14px}
+.hc .scarf{flex:1;height:4px;position:relative}
+.hc .scarf b{position:absolute;left:0;bottom:8px;font-weight:400;font-size:8.5px;letter-spacing:.2em;opacity:.6}
+.hc .scarf::before{content:"";position:absolute;inset:0;border-radius:2px;background:currentColor;opacity:.12}
+.hc .scarf i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:2px;background:repeating-linear-gradient(90deg,currentColor 0 9px,transparent 9px 13px);opacity:.75;transition:width 1.6s var(--ease) .3s}
+.hc.grown .scarf i{width:var(--w)}
+.hc .pill{display:inline-flex;align-items:center;gap:8px;background:var(--k);color:var(--c);border-radius:999px;padding:9px 14px;font-size:11px;letter-spacing:.08em}
+.hc:focus-visible{outline:1px dotted var(--fg);outline-offset:6px}
+.hc.answer{animation:answer 2s ease}
+@keyframes answer{0%{box-shadow:0 0 0 0 rgba(255,250,235,0)}35%{box-shadow:0 0 0 1px rgba(255,250,235,.45),0 0 26px 3px rgba(255,244,215,.28)}100%{box-shadow:0 0 0 0 rgba(255,250,235,0)}}
+.arrow{all:unset;cursor:pointer;position:absolute;top:50%;transform:translateY(-50%);width:34px;height:44px;display:grid;place-items:center;font-size:22px;color:var(--fg-soft);z-index:30;transition:color .3s,opacity .8s var(--ease)}
+.arrow:hover,.arrow:focus-visible{color:var(--fg)}
+.arrow.hid{opacity:0;pointer-events:none}
+.arrow.l{left:calc(50% - 200px)}.arrow.r{left:calc(50% + 166px)}
+.hd{min-width:0;animation:lnIn .7s var(--ease);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:8px clamp(32px,6vw,96px);align-items:start}
+.hd .head{grid-column:1/-1}
+@media (max-width:900px){.hd{grid-template-columns:minmax(0,1fr)}}
+.hd h3{font-family:var(--serif);font-size:clamp(38px,4vw,58px);font-weight:400;margin:0 0 6px;-webkit-text-stroke:0}
+.hd .portrait{font-size:13px;color:var(--fg-soft);margin:0 0 26px;letter-spacing:.03em}
+.hd h4{font-size:11px;letter-spacing:.32em;font-weight:400;color:var(--fg-soft);margin:26px 0 10px;text-transform:uppercase}
+.month{display:grid;grid-template-columns:repeat(31,minmax(0,1fr));gap:4px}
+.month i{display:block;aspect-ratio:1;border:1px solid var(--line)}
+.month i.on{background:var(--fg);border-color:var(--fg);opacity:.8}
+.totals{font-size:12.5px;letter-spacing:.04em;margin-top:10px}
+.curve{width:100%;height:auto;display:block}
+.hd p.body{font-size:14px;line-height:1.8;max-width:62ch;margin:0}
+.hd .src{font-size:11px;color:var(--fg-soft);margin-top:6px}
+
+/* v02.10: each day square opens that day in the calendar */
+.month button{all:unset;cursor:pointer;display:block;aspect-ratio:1;border:1px solid var(--line);transition:transform .3s var(--ease),border-color .3s}
+.month button.on{background:var(--fg);border-color:var(--fg);opacity:.8}
+.month button:hover,.month button:focus-visible{transform:scale(1.35);border-color:var(--fg)}
+.month i{opacity:.45}

@@ -1,0 +1,16 @@
+/* Layout: full-screen wave field (home) · side rail of spaces that becomes a closable sidebar inside a space · each space takes the full screen · prototype controls bottom-right */
+:root{
+  --paper:#FCFBF8; --beige:#E7DECC; --beige-deep:#CFC3AB; --ink:#151514; --ink-soft:#6E6A61; --forest:#1F3B2C; --night:#0A120E;
+  /* live tokens, rewritten by the day cycle */
+  --bg:#FCFBF8; --fg:#151514; --fg-soft:rgba(21,21,20,.55); --line:rgba(21,21,20,.16); --sheet:rgba(252,251,248,.86); --glow:#1F3B2C; --tile:#E7DECC; --tile-soft:rgba(231,222,204,.6);
+  --mono:"DM Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --side:210px;
+  color-scheme:light;
+}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--mono);font-weight:300;overflow:hidden;-webkit-font-smoothing:antialiased;-webkit-text-stroke:.34px currentColor}
+:root{--serif:"Instrument Serif","Iowan Old Style",Georgia,serif;--tech:"Exo 2","Eurostile","Segoe UI",system-ui,sans-serif}
+canvas#waves{position:fixed;inset:0;width:100%;height:100%;display:block}
+canvas#morph{position:fixed;inset:0;width:100%;height:100%;display:block;pointer-events:none;z-index:7}
+

@@ -1,0 +1,8 @@
+/* sound on/off: a little live wave, a flat line when silent */
+.mute{all:unset;cursor:pointer;position:fixed;right:20px;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:12;display:flex;align-items:center;gap:2.5px;height:16px;padding:4px}
+.mute i{display:block;width:1.5px;height:14px;background:var(--fg);opacity:.75;transform:scaleY(.08);transition:transform .09s linear}
+@keyframes bar{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+.mute.off i{transform:scaleY(.08) !important}
+.mute:focus-visible{outline:1px dotted var(--fg);outline-offset:3px}
+.hc.hid{opacity:0 !important;transition:none !important}
+

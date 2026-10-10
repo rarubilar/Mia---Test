@@ -1,0 +1,36 @@
+/* v02.9.1: XMB-style column — Mia's light, the space's icon, the other spaces almost invisible below */
+.xmb{position:fixed;left:max(24px,3vw);top:0;bottom:0;width:112px;z-index:6;display:flex;flex-direction:column;align-items:center;padding-top:14vh;opacity:0;pointer-events:none;transition:opacity .7s var(--ease)}
+.xmb.shown{opacity:1;pointer-events:auto}
+body:not(.inspace) .xmb{opacity:0;pointer-events:none}
+.mia{width:84px;height:84px;position:relative}
+.mia i{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,var(--glow) 0 6%,color-mix(in srgb,var(--glow) 40%,transparent) 16%,color-mix(in srgb,var(--glow) 10%,transparent) 38%,transparent 66%);animation:miaBreath 10s ease-in-out infinite}
+@keyframes miaBreath{0%,100%{transform:scale(.92);opacity:.85}50%{transform:scale(1.12);opacity:1}}
+.xsel{margin-top:26px;position:relative}
+.xsel::after{content:"";position:absolute;right:-26px;top:50%;margin-top:-5px;border:5px solid transparent;border-right:7px solid var(--fg-soft);border-left:0;opacity:.7}
+.xi{all:unset;cursor:pointer;display:grid;place-items:center;color:var(--fg);position:relative}
+.xi svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.61;stroke-linecap:round;stroke-linejoin:round}
+.xi.big{cursor:default}
+.xi.big svg{width:66px;height:66px;stroke-width:1.32;filter:drop-shadow(0 0 9px color-mix(in srgb,var(--glow) 45%,transparent))}
+.xlist{margin-top:34px;display:flex;flex-direction:column;align-items:center;gap:20px}
+.xlist .xi{opacity:.15;transition:opacity .5s var(--ease)}
+.xlist .xi:hover,.xlist .xi:focus-visible{opacity:.6}
+.xlist .xi span{position:absolute;left:44px;white-space:nowrap;font-family:var(--tech);font-size:11px;font-weight:300;letter-spacing:.3em;text-transform:uppercase;opacity:0;transition:opacity .4s var(--ease)}
+.xlist .xi:hover span,.xlist .xi:focus-visible span{opacity:1}
+.xi:focus-visible{outline:1px dotted var(--fg-soft);outline-offset:6px}
+canvas#xmbfx{position:fixed;inset:0;width:100%;height:100%;display:block;pointer-events:none;z-index:7}
+/* the space column replaces the SPACES sidebar; the content moves right of it and waits for the gathering */
+body.inspace:not(.sideopen) .opener{display:none}
+body.inspace .sheet{padding-left:calc(max(24px,3vw) + 150px)}
+.space.on{transition:opacity .9s var(--ease)}
+body.arriving .space.on{opacity:0}
+@media (max-width:760px){.xmb{width:64px;padding-top:12vh}.mia{width:56px;height:56px}.xi.big svg{width:44px;height:44px}.xsel::after{display:none}body.inspace .sheet{padding-left:96px}}
+@media (prefers-reduced-motion:reduce){.mia i{animation:none}}
+/* the habit ring fades out before it reaches the space column */
+body.inspace .carousel{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%)}
+/* v02.10: minimal icons; the other spaces 15% smaller and easier to see */
+.xi svg.mn{stroke-width:1.2}
+.xi.big svg.mn{stroke-width:1.05}
+.xlist .xi svg{width:24px;height:24px}
+.xlist .xi{opacity:.52}   /* v02.10.1: 30% less transparent */
+.xlist .xi:hover,.xlist .xi:focus-visible{opacity:.75}
+.xlist .xi span{left:38px}

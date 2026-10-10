@@ -1,0 +1,37 @@
+/* ---------- side rail (home) → sidebar (inside a space) ---------- */
+.rail{position:fixed;left:max(20px,3vw);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:22px;z-index:6;transition:opacity 1.4s var(--ease)}
+.rail button.sp{all:unset;cursor:pointer;display:flex;align-items:center;gap:14px;font-family:var(--tech);font-size:13px;font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:var(--fg-soft);transition:color .4s var(--ease)}
+.rail .tick{width:14px;height:1px;background:currentColor;transition:width .5s var(--ease)}
+.rail button.sp:hover,.rail button.sp:focus-visible,.rail button.sp[aria-pressed="true"]{color:var(--fg)}
+.rail button.sp:hover .tick,.rail button.sp:focus-visible .tick,.rail button.sp[aria-pressed="true"] .tick{width:38px}
+.rail button:focus-visible{outline:1px dotted var(--fg-soft);outline-offset:6px}
+.rail .railtop{display:none}
+/* inside a space the names slide left and fade; the sidebar exists only after pressing SPACES */
+.rail button.sp{transition:color .4s var(--ease),opacity .45s var(--ease) var(--d,0s),transform .55s var(--ease) var(--d,0s)}
+body.inspace .rail button.sp{opacity:0;transform:translateX(-36px);pointer-events:none}
+body.inspace.sideopen .rail button.sp{opacity:1;transform:none;pointer-events:auto}
+.sidepanel{position:fixed;left:0;top:0;bottom:0;width:var(--side);background:var(--sheet);border-right:1px solid var(--line);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:5;transform:translateX(-101%);transition:transform .6s var(--ease)}
+body.inspace.sideopen .sidepanel{transform:none}
+.sidepanel button{all:unset;cursor:pointer;position:absolute;top:clamp(28px,6vh,64px);left:28px;font-size:11px;letter-spacing:.32em;color:var(--fg-soft)}
+.sidepanel button:hover,.sidepanel button:focus-visible{color:var(--fg)}
+.opener{all:unset;cursor:pointer;position:fixed;top:clamp(28px,6vh,64px);left:clamp(16px,5vw,64px);z-index:6;font-size:11px;letter-spacing:.32em;color:var(--fg-soft);display:none;align-items:center;gap:10px}
+.opener i{display:inline-flex;flex-direction:column;gap:3px}.opener i b{display:block;width:16px;height:1px;background:currentColor}
+.opener:hover,.opener:focus-visible{color:var(--fg)}
+body.inspace:not(.sideopen) .opener{display:flex}
+.homebtn{all:unset;cursor:pointer;position:fixed;top:clamp(28px,6vh,64px);right:clamp(16px,5vw,64px);z-index:6;font-size:11px;letter-spacing:.32em;color:var(--fg-soft);display:none}
+.homebtn:hover,.homebtn:focus-visible{color:var(--fg)}
+.addwrap{position:relative;margin:-14px 0 0;height:44px;z-index:40}
+.addh{all:unset;cursor:pointer;display:inline-grid;place-items:center;width:44px;height:44px;margin-left:-6px;font-family:var(--serif);font-size:46px;font-weight:400;line-height:1;color:var(--fg-soft);-webkit-text-stroke:0;transition:color .3s,transform .4s var(--ease)}
+.addh:hover{transform:rotate(90deg)}
+.addh:hover,.addh:focus-visible{color:var(--fg)}
+.newh{position:absolute;top:52px;left:0;z-index:9;width:260px;padding:20px;background:var(--bg);border:1px solid var(--line);display:none;flex-direction:column;gap:14px}
+.newh.on{display:flex;animation:lnIn .5s var(--ease)}
+.newh label{font-size:10px;letter-spacing:.24em;color:var(--fg-soft)}
+.newh input{all:unset;border-bottom:1px solid var(--line);padding:6px 0;font-size:14px;color:var(--fg)}
+.newh input#nhName{font-family:var(--serif);font-size:24px;-webkit-text-stroke:0}
+.newh .row{display:flex;justify-content:space-between;align-items:center}
+.newh button{all:unset;cursor:pointer;font-size:11px;letter-spacing:.2em;color:var(--fg-soft)}
+.newh button.go{background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:999px}
+body.inspace .homebtn{display:block}
+body.inspace .back:not(.hb){display:none}
+

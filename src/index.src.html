@@ -1,0 +1,114 @@
+<title>Mia Test · V02.2</title>
+<!-- fonts are bundled with the test version (SIL Open Font License), so it works the same everywhere -->
+<style>@font-face{font-family:"Instrument Serif";src:url(fonts/instrument-serif-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:"Instrument Serif";src:url(fonts/instrument-serif-latin-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}@font-face{font-family:"DM Mono";src:url(fonts/dm-mono-latin-300-normal.woff2) format("woff2");font-weight:300;font-style:normal;font-display:swap}@font-face{font-family:"DM Mono";src:url(fonts/dm-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:"DM Mono";src:url(fonts/dm-mono-latin-500-normal.woff2) format("woff2");font-weight:500;font-style:normal;font-display:swap}@font-face{font-family:"Exo 2";src:url(fonts/exo-2-latin-300-normal.woff2) format("woff2");font-weight:300;font-style:normal;font-display:swap}@font-face{font-family:"Exo 2";src:url(fonts/exo-2-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}</style>
+<style>
+/*CSS*/
+</style>
+
+<canvas id="waves" aria-hidden="true"></canvas>
+<canvas id="morph" aria-hidden="true"></canvas>
+<button class="begin" id="begin" aria-label="Open Mia with sound"><span id="beginTxt">touch to begin</span><small class="tbadge">Mia Test · V02.2 · test version · Entrega Final VibeCoding · best with sound, on a computer</small></button>
+<div class="wordmark" id="wordmark" aria-hidden="true">mia</div>
+
+<div class="sidepanel" id="sidepanel"><button id="railClose" aria-label="Close the sidebar">‹ CLOSE</button></div>
+<nav class="rail" aria-label="Spaces">
+  <button class="sp" data-space="calendar"><span class="tick"></span><span class="lbl">Calendar</span></button>
+  <button class="sp" data-space="record"><span class="tick"></span><span class="lbl">Record</span></button>
+  <button class="sp" data-space="habits"><span class="tick"></span><span class="lbl">Habits</span></button>
+  <button class="sp" data-space="seasons"><span class="tick"></span><span class="lbl">Seasons</span></button>
+  <button class="sp" data-space="experiments"><span class="tick"></span><span class="lbl">Experiments</span></button>
+</nav>
+<button class="homebtn" id="homeBtn">HOME</button>
+<button class="opener" id="opener" aria-label="Open the spaces sidebar"><i><b></b><b></b><b></b></i>SPACES</button>
+
+<section class="sheet" id="sheet" aria-live="polite">
+
+  <div class="space" id="sp-calendar">
+    <p class="eyebrow">Calendar</p>
+    <h2 class="title">October 2026</h2>
+    <div class="calwrap" id="calwrap">
+      <div class="calside"><div class="cal" id="cal"></div></div>
+      <div class="daypanel" id="daypanel"><button class="dclose" id="dclose">× CLOSE DAY</button><div class="day" id="day"></div></div>
+    </div>
+    <p class="note">Example days. Opening a day plays it as a short melody: each habit has its own note, in the order of the day. The lit dots mark days that hold a memory.</p>
+  </div>
+
+  <div class="space" id="sp-record">
+    <div class="flow" id="flow">
+      <div class="crop"><i></i><i></i><i></i><i></i></div>
+      <div class="fdate" id="fdate"></div>
+      <div class="fside" id="fside"></div>
+      <div style="position:absolute;left:clamp(16px,4vw,54px);right:clamp(16px,4vw,54px);bottom:110px">
+        <div class="tray" id="tray"><span class="tl">Drag onto the day</span></div>
+        <div class="fhint">Scroll or ↑ ↓ to move between days</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="space" id="sp-habits">
+    <div id="hmenu">
+      <p class="eyebrow">Habits</p>
+      <h2 class="title">Your habits</h2>
+      <div class="addwrap">
+        <button class="addh" id="addH" aria-label="New habit">+</button>
+        <form class="newh" id="newH" autocomplete="off">
+          <label for="nhName">NEW HABIT</label><input id="nhName" maxlength="24" placeholder="Swim" required>
+          <label>PICK ITS EMOJI</label><div class="emopick" id="emoPick" role="radiogroup" aria-label="Emoji for the new habit"></div><input type="hidden" id="nhEmoji">
+          <div class="row"><button type="button" id="nhCancel">CANCEL</button><button class="go" type="submit">CREATE</button></div>
+        </form>
+      </div>
+      <div class="carousel" id="carousel">
+        <button class="arrow l" id="prevH" aria-label="Previous habit">&lt;</button>
+        <button class="arrow r" id="nextH" aria-label="Next habit">&gt;</button>
+      </div>
+      <p class="note">The centre card is the one in focus; the arrows (or ← →) turn the ring. The avatar doing each habit is a placeholder for now.</p>
+    </div>
+    <div id="hview" hidden>
+      <button class="back hb" id="hback">← HABITS</button>
+      <div id="hdetail"></div>
+      <p class="note">Example numbers. The curve shows only where a habit sits on its way to automatic (Lally et al., 2010: a median of 66 days), never a streak.</p>
+    </div>
+  </div>
+
+  <div class="space" id="sp-seasons">
+    <p class="eyebrow">Seasons</p>
+    <h2 class="title">Your life as light</h2>
+    <div class="seasons" id="seasons"><canvas id="seasonCanvas"></canvas></div>
+    <p class="note">Example seasons, after the chapter wave in Beyond: Two Souls. The home waves dissolve into this stream as the space opens.</p>
+  </div>
+
+  <div class="space" id="sp-experiments">
+    <p class="eyebrow">Experiments</p>
+    <h2 class="title">Paths you tried</h2>
+    <div class="dunes" id="dunes"><canvas id="duneCanvas"></canvas></div>
+    <p class="note">Example experiments. A gust crosses the dunes, then each path settles: the way it went glows, the way it didn't drifts away like sand.</p>
+  </div>
+</section>
+
+<div class="unfold" id="unfold"></div>
+<button class="mute" id="mute" aria-label="Sound on" aria-pressed="true"><i></i><i></i><i></i><i></i><i></i></button>
+
+<div class="proto" id="proto" role="group" aria-label="Prototype controls">
+  <span>Mia Test · V02.2 · Entrega Final VibeCoding</span>
+  <label for="time">Time <b id="timeLbl">12:00</b></label>
+  <input id="time" type="range" min="0" max="24" step="0.05" value="12">
+  <button id="now">Now</button>
+  <button id="calm" aria-pressed="true">Calm</button>
+  <button id="restless" aria-pressed="false">Restless</button>
+  <button id="pulse">Pulse</button>
+  <button id="replay">Intro</button>
+  <button id="goodnight">Goodnight</button>
+  <button id="morphBtn" aria-pressed="true">Morph</button>
+  <button id="traces" aria-pressed="true">Traces</button>
+  <button id="natureBtn">Nature</button>
+  <button id="iconsBtn">Icons: minimal</button>
+  <button id="notesBtn">Messages</button>
+  <button id="galBtn">Record: galaxy</button>
+  <button id="marks" aria-pressed="true">Marks</button>
+  <button class="hide-proto" id="hideProto" aria-label="Hide prototype controls">–</button>
+</div>
+<script>
+(() => {
+/*JS*/
+})();
+</script>

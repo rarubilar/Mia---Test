@@ -1,0 +1,139 @@
+/* ===== v02.10 ===== */
+/* notifications on the waves: a small pulsing dot, a tiny bubble; it opens as the cursor passes */
+.notes{position:fixed;inset:0;z-index:6;pointer-events:none;opacity:0;transition:opacity .8s var(--ease)}
+.notes.on{opacity:1}
+.notes.on .nt{pointer-events:auto}
+.nt{position:absolute;width:0;height:0}
+.ndot{all:unset;cursor:pointer;position:absolute;left:-14px;top:-14px;width:28px;height:28px;display:grid;place-items:center}
+.ndot i{width:7px;height:7px;border-radius:50%;background:var(--glow);box-shadow:0 0 10px color-mix(in srgb,var(--glow) 55%,transparent);animation:npulse 2.6s ease-in-out infinite}
+.ndot::after{content:"";position:absolute;inset:7px;border-radius:50%;border:1px solid var(--glow);opacity:0;animation:nring 2.6s ease-out infinite}
+@keyframes npulse{0%,100%{transform:scale(.85)}50%{transform:scale(1.25)}}
+@keyframes nring{0%{transform:scale(.4);opacity:.55}100%{transform:scale(1.9);opacity:0}}
+.nbub{position:absolute;left:0;bottom:14px;transform:translateX(-50%);min-width:30px;padding:6px 9px;border:1px solid var(--line);border-radius:14px;background:var(--sheet);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:padding .45s var(--ease),border-radius .45s var(--ease)}
+.nbub::after{content:"";position:absolute;left:50%;bottom:-5px;width:8px;height:8px;margin-left:-4px;background:inherit;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
+.nmini{display:flex;gap:3px;justify-content:center}
+.nmini i{width:3px;height:3px;border-radius:50%;background:var(--fg-soft);animation:ndots 1.8s ease-in-out infinite}
+.nmini i:nth-child(2){animation-delay:.2s}.nmini i:nth-child(3){animation-delay:.4s}
+@keyframes ndots{0%,100%{opacity:.35}50%{opacity:1}}
+.nfull{opacity:0;width:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .4s var(--ease) .1s,width .5s var(--ease)}
+.nt.open .nmini{display:none}
+.nt.open .nbub{padding:14px 16px;border-radius:12px}
+.nt.open .nfull{opacity:1;width:250px}
+.nfull{display:block;max-height:0}
+.nt.open .nfull{max-height:260px}
+.nq{margin:0 0 4px;font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.25;-webkit-text-stroke:0;color:var(--fg)}
+.nq.small{font-size:16px;margin:0}
+.ns{margin:0 0 12px;font-size:10.5px;line-height:1.5;color:var(--fg-soft)}
+.nact{display:flex;flex-wrap:wrap;gap:6px}
+.nact button{all:unset;cursor:pointer;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--fg);transition:border-color .3s,background .3s}
+.nact button:hover,.nact button:focus-visible{border-color:var(--fg-soft);background:color-mix(in srgb,var(--fg) 6%,transparent)}
+.nact button.nh{letter-spacing:0;font-size:15px;padding:4px 7px}
+.nt.gone{opacity:0;transition:opacity 1s var(--ease)}
+
+/* Record → three ways in */
+body.insub .rail button.sp:not([data-space="record"]){opacity:0;transform:translateX(-36px);pointer-events:none}
+body.insub .rail button.sp[data-space="record"]{color:var(--fg)}
+body.insub .rail button.sp[data-space="record"] .tick{width:38px}
+.sub{position:fixed;z-index:6;display:flex;flex-direction:column;gap:22px;transform:translateY(-50%);pointer-events:none}
+.sub button.sp{all:unset;cursor:pointer;display:flex;align-items:center;gap:14px;font-family:var(--tech);font-size:13px;font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:var(--fg-soft);opacity:0;transform:translateX(-18px);transition:opacity .5s var(--ease) var(--d),transform .6s var(--ease) var(--d),color .4s var(--ease)}
+.sub .tick{width:14px;height:1px;background:currentColor;transition:width .5s var(--ease)}
+.sub.in{pointer-events:auto}
+.sub.in button.sp{opacity:1;transform:none}
+.sub button.sp:hover,.sub button.sp:focus-visible{color:var(--fg)}
+.sub button.sp:hover .tick,.sub button.sp:focus-visible .tick{width:38px}
+.sub button:focus-visible{outline:1px dotted var(--fg-soft);outline-offset:6px}
+body.insub .miahome{opacity:.25}
+
+/* Plan */
+#sp-plan{max-width:760px}
+.ptabs{display:flex;gap:26px;margin:-8px 0 26px}
+.ptabs button{all:unset;cursor:pointer;font-size:11px;letter-spacing:.32em;color:var(--fg-soft);padding-bottom:6px;border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
+.ptabs button[aria-selected="true"]{color:var(--fg);border-color:var(--fg)}
+.plist{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.pi{display:flex;align-items:center;gap:16px;padding:14px 2px;border-bottom:1px solid var(--line);animation:lnIn .6s var(--ease) var(--d) both}
+.ptick{all:unset;cursor:pointer;flex:none;width:18px;height:18px;border:1px solid var(--fg-soft);display:grid;place-items:center;transition:background .3s,border-color .3s}
+.ptick svg{width:12px;height:12px;fill:none;stroke:var(--bg);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .3s}
+.ptick[aria-pressed="true"]{background:var(--fg);border-color:var(--fg)}
+.ptick[aria-pressed="true"] svg{opacity:1}
+.ptick.ghost{border-style:dotted;opacity:.4;cursor:default}
+.ptick:focus-visible{outline:1px dotted var(--fg);outline-offset:3px}
+.pt{flex:none;width:46px;font-size:12px;color:var(--fg-soft)}
+.px{all:unset;flex:1;min-width:0;font-size:14px;color:var(--fg)}
+.pi.done .px{color:var(--fg-soft);text-decoration:line-through;text-decoration-thickness:1px}
+.pe{font-size:16px}
+.pi small{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-soft);border:1px solid var(--line);padding:2px 7px;border-radius:999px}
+.pdel{all:unset;cursor:pointer;width:20px;text-align:center;color:var(--fg-soft);opacity:0;transition:opacity .3s}
+.pi:hover .pdel,.pdel:focus-visible{opacity:1}
+.padd{display:flex;gap:14px;align-items:center;margin-top:18px}
+.padd input{all:unset;border-bottom:1px solid var(--line);padding:6px 0;font-size:13px;color:var(--fg)}
+.padd input::placeholder{color:var(--fg-soft);opacity:.7}
+#paddT{width:46px}#paddX{flex:1}
+.padd button{all:unset;cursor:pointer;font-size:11px;letter-spacing:.3em;color:var(--fg-soft)}
+.padd button:hover{color:var(--fg)}
+.pnight[hidden]{display:none}
+.pnight{margin-top:34px;display:flex;align-items:center;gap:24px;animation:lnIn 1s var(--ease)}
+.pnight p{margin:0;font-family:var(--serif);font-style:italic;font-size:20px;-webkit-text-stroke:0}
+.pnight button{all:unset;cursor:pointer;font-size:11px;letter-spacing:.32em;padding:10px 18px;border:1px solid var(--fg-soft);border-radius:999px;color:var(--fg)}
+.pnight button:hover{background:var(--fg);color:var(--bg)}
+
+/* Modes: only the waves, a tiny dot, then a timer */
+.mode{position:fixed;inset:0;z-index:7;pointer-events:none;opacity:0;transition:opacity .9s var(--ease)}
+body.inmode .mode{opacity:1}
+body.inmode .rail,body.inmode .miahome,body.inmode .notes{opacity:0 !important;pointer-events:none !important}
+.mname{position:absolute;top:clamp(28px,6vh,64px);left:50%;transform:translateX(-50%);margin:0;font-family:var(--tech);font-size:11px;letter-spacing:.42em;padding-left:.42em;text-transform:uppercase;color:var(--fg-soft)}
+.mleave{all:unset;cursor:pointer;position:absolute;top:clamp(28px,6vh,64px);right:clamp(16px,5vw,64px);font-size:11px;letter-spacing:.32em;color:var(--fg-soft);pointer-events:auto}
+.mleave:hover{color:var(--fg)}
+.mode.done .mleave{opacity:0;pointer-events:none}
+.mstart,.mtimer{all:unset;cursor:pointer;position:absolute;left:50%;bottom:150px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;pointer-events:none;transition:opacity .7s var(--ease)}
+.mstart i{width:9px;height:9px;border-radius:50%;background:var(--fg);box-shadow:0 0 14px color-mix(in srgb,var(--glow) 50%,transparent);animation:npulse 3s ease-in-out infinite}
+.mbox{font-size:10px;letter-spacing:.3em;padding:6px 12px 6px calc(12px + .3em);border:1px solid var(--line);border-radius:4px;color:var(--fg-soft);background:var(--sheet)}
+.mstart:hover .mbox{color:var(--fg);border-color:var(--fg-soft)}
+.mode.ready .mstart,.mode.running .mtimer{opacity:1;pointer-events:auto}
+.mtimer b{font-weight:300;font-size:15px;letter-spacing:.16em;color:var(--fg)}
+.mbody{display:flex;gap:14px;font-size:10px;color:var(--fg-soft);letter-spacing:.08em}
+.mbody span{display:inline-flex;align-items:center;gap:4px}
+.mbody svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linejoin:round;stroke-linecap:round}
+.mtimer:hover b{text-shadow:0 0 12px color-mix(in srgb,var(--glow) 60%,transparent)}
+.mdone{position:absolute;left:50%;top:24vh;transform:translateX(-50%);width:min(620px,86vw);text-align:center;opacity:0;pointer-events:none;transition:opacity .8s var(--ease)}
+.mode.done .mdone{opacity:1;pointer-events:auto}
+.mline{margin:0 0 12px;font-size:15px;letter-spacing:.06em}
+.msum{margin:0 0 20px;font-family:var(--serif);font-style:italic;font-size:20px;-webkit-text-stroke:0;color:var(--fg-soft)}
+.mact{display:flex;gap:12px;justify-content:center}
+.mact button{all:unset;cursor:pointer;font-size:10px;letter-spacing:.3em;padding:8px 14px;border:1px solid var(--line);border-radius:999px;color:var(--fg)}
+.mact button:hover{border-color:var(--fg-soft)}
+
+/* settings: a small gear (no word) left of the sound toggle; a quiet panel from the right */
+.gear{all:unset;cursor:pointer;position:fixed;right:54px;bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:12;width:20px;height:20px;color:var(--fg);opacity:.6;transition:opacity .3s,transform .6s var(--ease)}
+.gear svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round}
+.gear:hover,.gear:focus-visible{opacity:1;transform:rotate(45deg)}
+.settings{position:fixed;top:0;right:0;bottom:0;width:min(460px,94vw);z-index:13;box-sizing:border-box;padding:clamp(28px,6vh,64px) 32px 60px;overflow:auto;background:var(--bg);border-left:1px solid var(--line);transform:translateX(102%);transition:transform .6s var(--ease)}
+body.setting .settings{transform:none}
+.settings h2{font-family:var(--serif);font-weight:400;font-size:40px;margin:0 0 8px;-webkit-text-stroke:0}
+.slead{font-size:11px;color:var(--fg-soft);line-height:1.6;margin:0 0 26px}
+.sclose{all:unset;cursor:pointer;position:absolute;top:clamp(28px,6vh,64px);right:32px;font-size:11px;letter-spacing:.32em;color:var(--fg-soft)}
+.sclose:hover{color:var(--fg)}
+.settings section{margin-bottom:26px}
+.settings h4{font-size:10px;font-weight:400;letter-spacing:.32em;text-transform:uppercase;color:var(--fg-soft);margin:0 0 6px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.srow{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid color-mix(in srgb,var(--line) 55%,transparent)}
+.srow p{margin:0;font-size:13px}
+.srow small{display:block;margin-top:4px;font-size:10px;line-height:1.5;color:var(--fg-soft);max-width:220px}
+.sctl{display:flex;align-items:flex-start;justify-content:flex-end;flex:none;max-width:210px}
+.sw{all:unset;cursor:pointer;width:34px;height:18px;border-radius:999px;border:1px solid var(--fg-soft);position:relative;transition:background .3s}
+.sw i{position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:var(--fg-soft);transition:transform .35s var(--ease),background .3s}
+.sw[aria-pressed="true"]{background:var(--fg)}
+.sw[aria-pressed="true"] i{transform:translateX(16px);background:var(--bg)}
+.seg{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px}
+.seg button,.slink,.addc{all:unset;cursor:pointer;font-size:10px;letter-spacing:.08em;padding:4px 8px;border:1px solid var(--line);border-radius:999px;color:var(--fg-soft)}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.seg button:hover,.slink:hover,.addc:hover{color:var(--fg)}
+.slink:disabled{opacity:.45;cursor:default}
+.sval{font-size:10.5px;line-height:1.55;color:var(--fg-soft);text-align:right}
+.chips2{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px}
+.chips2 span{font-size:10px;padding:3px 8px;border-radius:999px;background:color-mix(in srgb,var(--fg) 7%,transparent)}
+.step{display:flex;align-items:center;gap:8px;font-size:12px}
+.step b{font-weight:400}
+.step button{all:unset;cursor:pointer;width:20px;height:20px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%}
+body.paused canvas#waves{filter:grayscale(1);opacity:.75;transition:filter 1s,opacity 1s}
+.xlist .xi span{pointer-events:none}
+.rail{pointer-events:none}.rail button,.rail button.sp{pointer-events:auto}   /* the empty rail box never catches clicks meant for a space */
+body:not(.inmode) .mode *{pointer-events:none !important}

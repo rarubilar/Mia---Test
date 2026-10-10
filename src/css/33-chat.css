@@ -1,0 +1,131 @@
+/* v02.9.3: Mia's circle (home + space column), the solid icon set, and the chat where only the waves remain */
+.xdefs{position:absolute;width:0;height:0;overflow:hidden;color:var(--fg)}
+.xi svg.fs{stroke:none}
+.xi svg.fs .f1{fill:url(#xg)}
+.xi svg.fs .f2{fill:url(#xg);opacity:.5}
+.xi svg.fs .f3{fill:url(#xg);opacity:.42}
+.xi svg.fs .cut{fill:var(--bg);opacity:.78}
+.xi svg.fs .st{fill:none;stroke:url(#xg);stroke-width:4.4;stroke-linecap:round}
+.xi svg.fs .s2{opacity:.55}
+.xi.big svg.fs{filter:drop-shadow(0 0 10px color-mix(in srgb,var(--glow) 50%,transparent)) drop-shadow(0 1px 1px color-mix(in srgb,var(--glow) 35%,transparent))}
+
+/* her circle: the same light as the opening point, breathing */
+button.mia{cursor:pointer;border:0;padding:0;background:none;display:block;transition:transform .5s var(--ease)}
+button.mia:hover,button.mia:focus-visible{transform:scale(1.08)}
+button.mia:focus-visible{outline:1px dotted var(--fg-soft);outline-offset:4px;border-radius:50%}
+button.mia::after{content:"MIA";position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:-6px;font-family:var(--tech);font-size:10px;letter-spacing:.34em;padding-left:.34em;color:var(--fg-soft);opacity:0;transition:opacity .4s var(--ease)}
+button.mia:hover::after,button.mia:focus-visible::after{opacity:1}
+.miahome{all:unset;cursor:pointer;position:fixed;left:50%;top:56%;z-index:6;width:54px;height:54px;transform:translate(-50%,-50%);transition:opacity .9s var(--ease),transform .5s var(--ease)}
+.miahome i{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,var(--glow) 0 7%,color-mix(in srgb,var(--glow) 42%,transparent) 17%,color-mix(in srgb,var(--glow) 10%,transparent) 40%,transparent 68%);animation:miaBreath 10s ease-in-out infinite}
+.miahome i{transition:transform .45s var(--ease)}
+.miahome:hover i,.miahome:focus-visible i{transform:scale(1.5)}            /* v02.9.6: the dot grows so it reads as something to press */
+.miahome span{position:absolute;left:50%;top:100%;transform:translate(-50%,4px);font-family:var(--tech);font-size:10px;letter-spacing:.42em;padding-left:.42em;text-transform:uppercase;color:var(--fg-soft);opacity:0;pointer-events:none;transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.miahome:hover span,.miahome:focus-visible span{opacity:1;transform:translate(-50%,12px)}
+body.intro .miahome{opacity:0;pointer-events:none}
+body.intro.miaready .miahome{opacity:1;pointer-events:auto;transition:opacity .6s var(--ease)}   /* it is the opening light that stays */
+.miahome:focus-visible{outline:1px dotted var(--fg-soft);outline-offset:4px;border-radius:50%}
+body.inspace .miahome,body.chatting .miahome{opacity:0;pointer-events:none}
+
+/* opening the chat: the space fades and softens away, the column goes out one piece at a time */
+.sheet{transition:opacity .9s var(--ease),left .7s var(--ease),filter 1s var(--ease),transform 1s var(--ease)}
+body.chatting .sheet.open{opacity:0;pointer-events:none;filter:blur(8px);transform:scale(.985)}
+body.chatting .rail,body.chatting .opener,body.chatting .homebtn{opacity:0;pointer-events:none}
+.xlist,.xsel,.mia{transition:opacity .6s var(--ease),transform .5s var(--ease)}
+body.chatting .xlist{opacity:0;transition-delay:0s}
+body.chatting .xsel{opacity:0;transition-delay:.15s}
+body.chatting .mia{opacity:0;transition-delay:.05s}
+body.chatting .xmb{pointer-events:none}
+
+/* the chat: nothing but the waves, her words, and two quiet buttons */
+.chat{position:fixed;inset:0;z-index:8;pointer-events:none;opacity:0;transition:opacity .8s var(--ease)}
+body.chatting .chat{opacity:1}
+body.chatting .chat .cdock,body.chatting .chat .cclose{pointer-events:auto}
+.cclose{all:unset;cursor:pointer;position:fixed;top:clamp(28px,6vh,64px);right:clamp(16px,5vw,64px);font-size:11px;letter-spacing:.32em;color:var(--fg-soft)}
+.cclose:hover,.cclose:focus-visible{color:var(--fg)}
+.mwords{position:absolute;left:50%;top:20.8vh;transform:translateX(-50%);width:min(760px,86vw);margin:0;text-align:center;font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.3vw,30px);line-height:1.4;color:var(--fg);-webkit-text-stroke:0;opacity:0;transition:opacity 1.2s var(--ease)}
+.mwords.on{opacity:1}
+.mwords span{opacity:0;filter:blur(3px);transition:opacity .5s var(--ease),filter .6s var(--ease)}
+.mwords span.on{opacity:1;filter:none}
+.rwords{position:absolute;left:50%;bottom:calc(128px + 78px + var(--wgrow,0px));transform:translateX(-50%);width:min(620px,86vw);margin:0;text-align:center;font-size:12px;letter-spacing:.06em;line-height:1.7;color:var(--fg-soft);opacity:0;transition:opacity .8s var(--ease)}
+.rwords.on{opacity:1}
+.rwords.faint{letter-spacing:.3em}
+.rwords.on.faint{opacity:.55}
+.cdock{position:absolute;left:50%;bottom:128px;transform:translateX(-50%);width:min(560px,84vw);height:46px}
+.choose{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;gap:18px;transition:gap .6s var(--ease)}
+.cbtn{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:grid;place-items:center;width:46px;height:46px;border:1px solid var(--line);border-radius:999px;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--fg-soft);background:transparent;overflow:hidden;
+  transition:width .6s var(--ease),height .6s var(--ease),background .6s var(--ease),border-color .6s var(--ease),opacity .5s var(--ease),color .3s var(--ease),transform .4s var(--ease),box-shadow .6s var(--ease)}
+.cbtn span{display:grid;place-items:center;transition:opacity .25s var(--ease)}
+.cbtn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.cbtn:hover,.cbtn:focus-visible{color:var(--fg);border-color:var(--fg-soft)}
+.cbtn:focus-visible,.wico:focus-visible,.cback:focus-visible{outline:1px dotted var(--fg-soft);outline-offset:5px}
+/* TALK → the button closes into a little dot: press it to talk */
+.chat[data-mode="voice"] .choose{gap:0}
+.chat[data-mode="voice"] .talk{width:16px;height:16px;border-color:transparent;background:var(--fg);box-shadow:0 0 18px color-mix(in srgb,var(--glow) 45%,transparent)}
+.chat[data-mode="voice"] .talk span,.chat[data-mode="write"] .cbtn span{opacity:0}
+.chat[data-mode="voice"] .talk:hover{transform:scale(1.25)}
+.chat[data-mode="voice"] .write{width:0;border-width:0;opacity:0;pointer-events:none}
+.chat.listening .talk{width:22px;height:22px;animation:hear 1.6s ease-in-out infinite}
+@keyframes hear{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--glow) 40%,transparent),0 0 18px color-mix(in srgb,var(--glow) 45%,transparent)}50%{box-shadow:0 0 0 12px transparent,0 0 26px color-mix(in srgb,var(--glow) 60%,transparent)}}
+/* WRITE → a text bar: microphone on the left (it writes what you say), + on the right for documents */
+.chat[data-mode="write"] .choose{opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
+.wbar{position:absolute;left:50%;bottom:0;transform:translateX(-50%);box-sizing:border-box;width:118px;min-height:46px;display:flex;align-items:flex-end;gap:6px;padding:6px 8px;border:1px solid var(--line);border-radius:23px;background:var(--sheet);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;pointer-events:none;overflow:hidden;transition:width .7s var(--ease),opacity .5s var(--ease)}
+.chat[data-mode="write"] .wbar{width:100%;opacity:1;pointer-events:auto}
+.wbar input[type="file"]{display:none}
+.wbar textarea{all:unset;flex:1;min-width:0;box-sizing:border-box;padding:7px 0;max-height:132px;overflow-y:auto;resize:none;font-size:11px;line-height:1.6;letter-spacing:.04em;color:var(--fg);white-space:pre-wrap;overflow-wrap:anywhere}
+.wbar textarea::placeholder{color:var(--fg-soft);opacity:.7}
+.wico{all:unset;cursor:pointer;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;color:var(--fg-soft);transition:color .3s,background .3s}
+.wico:hover{color:var(--fg)}
+.wico svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.chat.dictating #dictB{color:var(--bg);background:var(--fg);animation:hear 1.6s ease-in-out infinite}
+.chips{position:absolute;left:50%;bottom:calc(100% + 12px + var(--wgrow,0px));transform:translateX(-50%);display:flex;gap:8px;white-space:nowrap}
+.chips span{font-size:10px;letter-spacing:.08em;padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--fg-soft);background:var(--sheet)}
+.chat:not([data-mode="write"]) .chips{display:none}
+/* the little arrow back to TALK / WRITE */
+.cback{all:unset;cursor:pointer;position:absolute;left:50%;top:calc(100% + 16px);transform:translateX(-50%);color:var(--fg-soft);opacity:0;pointer-events:none;transition:opacity .5s var(--ease) .2s,color .3s}
+.cback svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;display:block}
+.cback:hover{color:var(--fg)}
+.chat[data-mode="voice"] .cback,.chat[data-mode="write"] .cback{opacity:.75;pointer-events:auto}
+@media (max-width:760px){.cdock{bottom:150px}.rwords{bottom:228px}.mwords{top:16vh}}
+@media (prefers-reduced-motion:reduce){.miahome i{animation:none}.chat.listening .talk,.chat.dictating #dictB{animation:none}}
+/* v02.10: her words 10% smaller; "Show me"; a flatter dot while she listens */
+.mwords{font-size:clamp(20px,2.07vw,27px)}
+.showme{all:unset;cursor:pointer;display:inline-block;margin-top:18px;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.32em;padding:7px 14px 7px calc(14px + .32em);border:1px solid var(--line);border-radius:999px;color:var(--fg-soft);-webkit-text-stroke:.34px currentColor;animation:lnIn .8s var(--ease);transition:color .3s,border-color .3s}
+.showme:hover,.showme:focus-visible{color:var(--fg);border-color:var(--fg-soft)}
+.chat.listening .talk{width:38px;height:5px;border-radius:3px;animation:hearFlat 2.4s ease-in-out infinite}
+@keyframes hearFlat{0%,100%{transform:scaleX(.9);box-shadow:0 0 12px color-mix(in srgb,var(--glow) 35%,transparent)}50%{transform:scaleX(1.12);box-shadow:0 0 22px color-mix(in srgb,var(--glow) 60%,transparent)}}
+/* V02.12: answer kinds and quiet controls under Mia's words */
+.mwords.on{pointer-events:auto}
+.ans{margin:16px auto 0;font-family:var(--mono);font-style:normal;-webkit-text-stroke:.34px currentColor;opacity:.5;transition:opacity .5s var(--ease);animation:lnIn .8s var(--ease)}
+.mwords:hover .ans,.ans:focus-within{opacity:1}
+.akind{margin:0 0 10px;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--fg-soft)}
+.akind b{font-weight:400;color:#B8651C}
+.k-guess .akind,.k-notfound .akind{font-style:italic;letter-spacing:.2em}
+.arow{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap}
+.apill{all:unset;cursor:pointer;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--fg-soft);transition:color .3s,border-color .3s}
+.apill:hover,.apill:focus-visible{color:var(--fg);border-color:var(--fg-soft)}
+.aics{display:inline-flex;gap:2px;margin-left:6px}
+.aic{all:unset;cursor:pointer;position:relative;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;color:var(--fg-soft);transition:color .3s,background .3s}
+.aic svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.aic:hover,.aic:focus-visible{color:var(--fg);background:color-mix(in srgb,var(--fg) 7%,transparent)}
+.aic.on{color:#B8651C}
+.aic.on svg{fill:#B8651C}
+.atip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);white-space:nowrap;font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:var(--fg);color:var(--bg);opacity:0;pointer-events:none;transition:opacity .25s}
+.aic:hover .atip,.aic:focus-visible .atip{opacity:1}
+.afix{display:flex;align-items:center;gap:8px;width:min(420px,80vw);border-bottom:1px solid var(--fg-soft);padding:2px 0}
+.afix input{all:unset;flex:1;font-size:12px;letter-spacing:.04em;color:var(--fg);text-align:left}
+.afix input::placeholder{color:var(--fg-soft)}
+.afix button{all:unset;cursor:pointer;width:22px;text-align:center;font-size:16px;color:var(--fg-soft)}
+.afix button:hover{color:var(--fg)}
+.mwords.forgetting > span{opacity:.15 !important;filter:blur(2px) !important;text-decoration:line-through;transition:opacity .8s,filter .8s}
+.mwords .ans span{opacity:1;filter:none;transition:none}
+.mwords .ans .atip{opacity:0;transition:opacity .25s}
+.mwords .ans .aic:hover .atip,.mwords .ans .aic:focus-visible .atip{opacity:1}
+.atip{bottom:auto;top:calc(100% + 6px)}   /* below the icon, so it never covers the answer kind */
+/* V02.12.1: every answer action is an icon */
+.arow .aic{border:1px solid var(--line)}
+.arow .aics .aic{border:0}
+.apick{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--fg-soft);margin-right:6px}
+.ahab{all:unset;cursor:pointer;width:30px;height:30px;display:grid;place-items:center;font-size:15px;border-radius:8px;background:var(--tile);transition:transform .2s}
+.ahab:hover{transform:scale(1.12)}
+.ahab.on{outline:1px solid #B8651C}
+.hd .saved{margin-top:14px}

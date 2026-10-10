@@ -1,0 +1,10 @@
+/* experiments: honest path */
+.dunes{position:relative;height:clamp(360px,58vh,520px)}
+.dunes canvas{position:absolute;inset:0;width:100%;height:100%}
+.elab{position:absolute;font-size:11px;letter-spacing:.14em;white-space:nowrap;opacity:0;transition:opacity 1s var(--ease)}
+.elab.soft{color:var(--fg-soft)}
+.dunes.on .elab{opacity:1}
+.path svg{width:100%;max-width:640px;height:auto;display:block}
+.path text{font-family:var(--mono);font-size:11px;letter-spacing:.12em;fill:var(--fg)}
+.path .soft{fill:var(--fg-soft)}
+

@@ -1,0 +1,118 @@
+/* ===== V02.11 · the morning card ===== */
+/* the orange dot on the waves, with a sunrise bubble */
+.mdot{position:fixed;left:0;top:0;width:0;height:0;z-index:6;opacity:0;pointer-events:none;transition:opacity .8s var(--ease)}
+.mdot.on{opacity:1;pointer-events:auto}
+.mcore{all:unset;cursor:pointer;position:absolute;left:-16px;top:-16px;width:32px;height:32px;display:grid;place-items:center}
+.mcore i{width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E9A25A,#B8651C 60%,#8C4712);box-shadow:0 0 12px rgba(184,101,28,.55);animation:npulse 2.8s ease-in-out infinite}
+.mcore::after{content:"";position:absolute;inset:8px;border-radius:50%;border:1px solid #B8651C;opacity:0;animation:nring 2.8s ease-out infinite}
+.mbub{position:absolute;left:0;bottom:16px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;padding:5px 9px;border:1px solid rgba(184,101,28,.5);border-radius:14px;background:var(--sheet);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#B8651C;white-space:nowrap;transition:padding .4s var(--ease)}
+.mbub::after{content:"";position:absolute;left:50%;bottom:-5px;width:8px;height:8px;margin-left:-4px;background:inherit;border-right:1px solid rgba(184,101,28,.5);border-bottom:1px solid rgba(184,101,28,.5);transform:rotate(45deg)}
+.mbub .nmini i{background:#B8651C}
+.mbub .mlab{max-width:0;overflow:hidden;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:max-width .5s var(--ease)}
+.mdot:hover .mbub .mlab{max-width:140px;margin-left:4px}
+/* opening: every space name leaves to the left; the card stands alone */
+body.morning .rail button.sp{opacity:0;transform:translateX(-36px);pointer-events:none}
+body.morning .miahome,body.morning .notes{opacity:0 !important;pointer-events:none !important}
+/* the card */
+.mcard{position:fixed;left:50%;top:50%;z-index:7;width:min(460px,calc(100vw - 40px));height:min(504px,calc(100vh - 110px));display:flex;flex-direction:column;box-sizing:border-box;margin-top:-10px;padding:30px 30px 28px;transform:translate(-50%,-50%) scale(.985);border:1px solid var(--line);border-radius:18px;background:var(--sheet);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;pointer-events:none;overflow:auto;transition:opacity .7s var(--ease),transform .9s var(--ease)}
+.mcard.in{opacity:1;transform:translate(-50%,-50%);pointer-events:auto}
+.mcard header{position:relative;margin-bottom:18px}
+.meyebrow{margin:0 0 12px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#D0662F}
+.msteps{list-style:none;margin:0;padding:0;display:flex;gap:16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-soft)}
+.msteps li{display:flex;align-items:center;gap:6px;opacity:.5;transition:opacity .4s}
+.msteps li::before{content:"";width:6px;height:6px;border-radius:50%;border:1px solid currentColor}
+.msteps li.on{opacity:1;color:var(--fg)}
+.msteps li.on::before{background:#E8743B;border-color:#E8743B}
+.msteps li.done{opacity:.8}
+.msteps li.done::before{background:currentColor}
+.mx{all:unset;cursor:pointer;position:absolute;right:-6px;top:-8px;font-size:20px;color:var(--fg-soft);padding:4px 8px}
+.mx:hover{color:var(--fg)}
+.mcbody{opacity:0;transform:translateX(14px)}
+.mcbody.show{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .6s var(--ease)}
+.mcbody h3{margin:0 0 6px;font-family:var(--serif);font-weight:400;font-size:32px;-webkit-text-stroke:0}
+.mlead{margin:0 0 16px;font-size:12px;line-height:1.6;color:var(--fg-soft)}
+.mlead em{font-family:var(--serif);font-size:15px;-webkit-text-stroke:0;color:var(--fg)}
+.mlines{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:8px;font-size:12.5px}
+.mlines .none{color:var(--fg-soft)}
+.mq{margin:0 0 10px;font-size:12px;letter-spacing:.04em}
+.mq.big{font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.35;-webkit-text-stroke:0;margin:4px 0 18px}
+.mrow{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:14px}
+.mrow.wrap{flex-wrap:wrap;justify-content:flex-start}
+.mrow.col{flex-direction:column;align-items:stretch}
+.mbtn{all:unset;cursor:pointer;text-align:center;font-size:10px;letter-spacing:.24em;text-transform:uppercase;padding:9px 14px;border:1px solid var(--line);border-radius:999px;color:var(--fg-soft);transition:color .3s,border-color .3s,background .3s}
+.mbtn:hover,.mbtn:focus-visible{color:var(--fg);border-color:var(--fg-soft)}
+.mbtn.go{color:var(--fg);border-color:var(--fg-soft)}
+.mbtn.go:hover{background:var(--fg);color:var(--bg)}
+.mbtn.big{padding:13px 16px;font-size:11px;background:#E8743B;border-color:#E8743B;color:#fff}
+.mbtn.big:hover{background:#D0662F;color:#fff}
+.mbtn:disabled{opacity:.4;cursor:default}
+.mtiles{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:12px}
+.mtile{all:unset;cursor:pointer;display:grid;place-items:center;height:34px;background:var(--tile);font-size:16px;border-radius:6px;transition:transform .2s}
+.mtile:hover{transform:scale(1.1)}
+.msleep{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:var(--fg-soft)}
+.msleep span{margin-right:4px}
+.mchip{all:unset;cursor:pointer;font-size:10px;letter-spacing:.08em;padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--fg-soft)}
+.mchip.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.mplan{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.mplan li{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}
+.mplan li.done .px{color:var(--fg-soft);text-decoration:line-through}
+.mplan .pt{width:42px;font-size:11px}
+.mplan .px{font-size:13px}
+.mdel{all:unset;cursor:pointer;width:18px;text-align:center;color:var(--fg-soft);opacity:.4}
+.mplan li:hover .mdel{opacity:1}
+.madd{display:flex;gap:10px;align-items:center;margin-top:10px}
+.madd input{all:unset;border-bottom:1px solid var(--line);padding:5px 0;font-size:12px;color:var(--fg)}
+.madd input::placeholder{color:var(--fg-soft);opacity:.7}
+#mAddT{width:42px}#mAddX,#mRecIn{flex:1}
+.madd button{all:unset;cursor:pointer;font-size:10px;letter-spacing:.24em;color:var(--fg-soft)}
+.madd.one{width:100%}
+.manswer{margin:16px 0 0;padding:12px 14px;border-left:2px solid #E8743B;font-size:12.5px;line-height:1.6;animation:lnIn .6s var(--ease)}
+.manswer b{font-weight:500}
+.manswer small{display:block;margin-top:4px;font-size:10.5px;color:var(--fg-soft)}
+
+/* V02.11.1: quieter cards — three dots, a small date tag, icon buttons */
+.mcard header{display:flex;align-items:center;justify-content:center;min-height:22px;margin-bottom:22px}
+.msteps{position:absolute;left:0;top:50%;transform:translateY(-50%);gap:6px}
+.msteps li{opacity:1}
+.msteps li::before{width:6px;height:6px;border-color:var(--fg-soft);opacity:.55}
+.msteps li.on::before{background:#B8651C;border-color:#B8651C;opacity:1}
+.mtag{font-size:7.65px;letter-spacing:.22em;text-transform:uppercase;color:var(--fg-soft)}
+.mx{top:50%;right:-8px;transform:translateY(-50%)}
+.mcbody{flex:1;display:flex;flex-direction:column;min-height:0;overflow:auto}
+.mcbody h3{font-size:36.8px;line-height:1.05}
+.mtiny{margin:2px 0 14px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-soft)}
+.mdayname{margin:0 0 16px;font-family:var(--serif);font-style:italic;font-size:17px;-webkit-text-stroke:0;text-align:left}
+.mq.big.mem{margin-top:calc(4px + 1.15em)}
+.mcbody > .mrow:last-of-type{margin-top:auto;padding-top:14px}
+.mbtn.ic{width:38px;height:38px;padding:0;display:grid;place-items:center;font-size:20px;letter-spacing:0;line-height:1}
+.mend{display:flex;align-items:center;gap:8px}
+.mplanb{position:relative}
+.mplanb svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mtip{position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%) translateX(6px);white-space:nowrap;font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 9px;border-radius:999px;background:var(--fg);color:var(--bg);opacity:0;pointer-events:none;transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.mplanb:hover .mtip,.mplanb:focus-visible .mtip{opacity:1;transform:translateY(-50%)}
+.mtiles[hidden]{display:none}
+.manswer{border-left-color:var(--fg-soft)}
+.mcbody h3 + .mplan{margin-top:14px}
+
+/* V02.11.3: the morning dot speaks the same language as the message dots, only amber */
+.mcore{left:-14px;top:-14px;width:28px;height:28px}
+.mcore i{width:7px;height:7px;background:#B8651C;box-shadow:0 0 10px rgba(184,101,28,.55);animation:npulse 2.6s ease-in-out infinite}
+.mcore::after{inset:7px;border-color:#B8651C;animation:nring 2.6s ease-out infinite}
+.mbub{bottom:14px;min-width:30px;padding:6px 9px;border:1px solid var(--line);border-radius:14px;background:var(--sheet);gap:0}
+.mbub::after{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mbub .nmini{gap:3px}
+.mbub .mlab{color:#B8651C}
+/* card 1: sleep above the buttons; the buttons sit where card 2's do */
+.mcbody .msleep{margin-top:auto}
+.mcbody .msleep + .mrow{margin-top:14px}
+.mcbody.stagger > :not(h3){opacity:0;animation:mlate .8s var(--ease) 2s forwards}
+@keyframes mlate{to{opacity:1}}
+.mbub{justify-content:center}   /* V02.11.4: the three dots sit in the middle */
+/* V02.13: the quiet undo, and the pre-lit answer in the ring */
+.undoic{all:unset;cursor:pointer;position:fixed;left:0;top:0;z-index:12;width:26px;height:26px;margin:-13px 0 0 -13px;display:grid;place-items:center;color:var(--fg);opacity:0;pointer-events:none;transition:opacity .5s var(--ease)}
+.undoic.on{opacity:.5;pointer-events:auto;animation:lnIn .5s var(--ease)}
+.undoic:hover,.undoic:focus-visible{opacity:.9}
+.undoic svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.utip{position:absolute;top:calc(100% + 4px);left:50%;transform:translateX(-50%);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--fg-soft);opacity:0;transition:opacity .25s;white-space:nowrap}
+.undoic:hover .utip{opacity:1}
+.opt.pre{border-color:var(--fg);background:var(--fg);color:var(--bg)}
