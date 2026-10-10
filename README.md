@@ -5,13 +5,13 @@
 👉 **Abrir la app:** https://rarubilar.github.io/Mia---Test/
 (mejor en computador, con sonido; no hay que instalar nada)
 
-🎬 **Video (3:22, Mia explica la app en español):** [`video/mia-test.mp4`](video/mia-test.mp4) · guion: [`video/guion.md`](video/guion.md)
+🎬 **Video (3:43, Mia explica la app en español):** [`video/mia-test.mp4`](video/mia-test.mp4) · guion: [`video/guion.md`](video/guion.md)
 
 ---
 
 ## Qué es Mia
 
-Mia ("Hebe Memory Space") es una app personal que guarda recuerdos, hábitos y un diario. Su promesa:
+Mia es parte de **Hebe Memory Space**: una herramienta para acompañarte en tu día a día, con un espacio cómodo, seguro e intuitivo donde seguir hábitos y guardar las actividades y los recuerdos que tú elijas. Su promesa:
 **el mejor día es el que Mia registra con precisión mientras la app casi no se abre.**
 
 Mia escucha, recuerda el diario y responde con su propia voz. Todo vive en el computador del usuario:
@@ -24,7 +24,7 @@ en inglés; esta guía, en español.
 
 ## Cómo recorrerla
 
-1. Toca la pantalla (**touch to begin**): suena la apertura y aparece el inicio.
+1. Toca la pantalla (**touch to begin**): suena la apertura y aparece el inicio. La música se pausa con las barritas de abajo a la derecha.
 2. **El botón (i)**, arriba a la izquierda, está en cada espacio y en cada ventana. Explica qué hace ese
    lugar, qué probar y cómo está hoy en la app real.
 3. **Centro de control** (abajo a la derecha): son los controles del prototipo. Al pasar el cursor por

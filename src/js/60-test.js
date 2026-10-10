@@ -84,6 +84,12 @@ setInterval(gReady, 300);
 let gHinted = false;
 setInterval(() => { if (gHinted || !gInfo.classList.contains('show')) return; gHinted = true; gInfo.classList.add('hint'); setTimeout(() => gInfo.classList.remove('hint'), 7000); }, 500);
 gInfo.insertAdjacentHTML('beforeend', '<span class="thint">What is this? Open me in every space</span>');
+// the music button introduces itself too, right after: one tap pauses the music
+const muteHint = document.createElement('span'); muteHint.className = 'mhint'; muteHint.textContent = 'Music on / off'; document.body.appendChild(muteHint);
+let mHinted = false;
+setInterval(() => { if (mHinted || !gHinted) return; mHinted = true; setTimeout(() => { $('#mute').classList.add('hl'); muteHint.classList.add('on');
+  setTimeout(() => { $('#mute').classList.remove('hl'); muteHint.classList.remove('on'); }, 7000); }, 2500); }, 500);
+$('#mute').setAttribute('title', 'Music on / off');
 
 /* ----- 2 · the command centre explains itself ----- */
 const PROTO_TIPS = {

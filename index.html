@@ -931,6 +931,11 @@ body.chatting .proto{opacity:0;pointer-events:none}
 .tinfo.hint{animation:tPulse 2.2s ease-in-out 3}
 @keyframes tPulse{50%{transform:scale(1.18)}}
 .tinfo.open .thint{opacity:0}
+/* the music button: a soft ring and a word, once, near the start */
+.mute.hl::after{content:"";position:absolute;inset:-9px -10px;border:1px solid var(--fg);border-radius:999px;opacity:0;animation:muteRing 2.3s ease-in-out 3}
+@keyframes muteRing{0%{opacity:0;transform:scale(.8)}35%{opacity:.75;transform:scale(1)}100%{opacity:0;transform:scale(1.25)}}
+.mhint{position:fixed;right:12px;bottom:calc(52px + env(safe-area-inset-bottom,0px));z-index:12;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--fg);opacity:0;pointer-events:none;transition:opacity .8s var(--ease)}
+.mhint.on{opacity:.8}
 
 /* --- 90-proto.css --- */
 /* ---------- prototype controls (not part of Mia) ---------- */
@@ -3709,6 +3714,12 @@ setInterval(gReady, 300);
 let gHinted = false;
 setInterval(() => { if (gHinted || !gInfo.classList.contains('show')) return; gHinted = true; gInfo.classList.add('hint'); setTimeout(() => gInfo.classList.remove('hint'), 7000); }, 500);
 gInfo.insertAdjacentHTML('beforeend', '<span class="thint">What is this? Open me in every space</span>');
+// the music button introduces itself too, right after: one tap pauses the music
+const muteHint = document.createElement('span'); muteHint.className = 'mhint'; muteHint.textContent = 'Music on / off'; document.body.appendChild(muteHint);
+let mHinted = false;
+setInterval(() => { if (mHinted || !gHinted) return; mHinted = true; setTimeout(() => { $('#mute').classList.add('hl'); muteHint.classList.add('on');
+  setTimeout(() => { $('#mute').classList.remove('hl'); muteHint.classList.remove('on'); }, 7000); }, 2500); }, 500);
+$('#mute').setAttribute('title', 'Music on / off');
 
 /* ----- 2 · the command centre explains itself ----- */
 const PROTO_TIPS = {
