@@ -5,7 +5,7 @@
 👉 **Abrir la app:** https://rarubilar.github.io/Mia---Test/
 (mejor en computador, con sonido; no hay que instalar nada)
 
-🎬 **Video (3 min, voz de Mia en inglés, subtítulos en español):** [`video/mia-test.mp4`](video/mia-test.mp4)
+🎬 **Video (3:22, Mia explica la app en español):** [`video/mia-test.mp4`](video/mia-test.mp4) · guion: [`video/guion.md`](video/guion.md)
 
 ---
 
